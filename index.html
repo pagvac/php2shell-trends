@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The PHP2Shell patch race</title>
+<meta name="description" content="Live tracker: how fast the internet is patching PHP against PHP2Shell (CVE-2026-109618/-109619).">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1b1f24; --muted:#6b7280; --border:#e5e7eb; --grid:#edf0f3;
+    --patched:#1a9850; --vuln:#f0a020; --eol:#d9433b; --unknown:#9aa0a6; --link:#2563eb;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --bg:#0e1116; --card:#161b22; --ink:#e6edf3; --muted:#9aa4b2; --border:#30363d; --grid:#21262d; --link:#539bf5; }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 56px;}
+  header h1{font-size:1.95rem;margin:.1rem 0 .3rem;letter-spacing:-.01em;}
+  .sub{color:var(--muted);font-size:.92rem;line-height:1.5;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:14px;margin:22px 0;}
+  .kpi{background:var(--card);border:1px solid var(--border);border-left-width:4px;border-radius:12px;padding:15px 18px;}
+  .kpi .n{font-size:2rem;font-weight:800;line-height:1.1;}
+  .kpi .l{font-weight:650;font-size:.85rem;margin-top:4px;}
+  .kpi .s{color:var(--muted);font-size:.78rem;margin-top:2px;}
+  .kpi .d{font-size:.76rem;font-weight:700;margin-top:6px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 10px 8px;margin:16px 0;}
+  .card h2{font-size:1rem;margin:4px 12px 2px;}
+  .card .cap{color:var(--muted);font-weight:400;font-size:.85rem;}
+  .chart{width:100%;height:380px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:780px){.grid2{grid-template-columns:1fr}.chart{height:320px}}
+  footer{color:var(--muted);font-size:.8rem;margin-top:26px;line-height:1.6;}
+  a{color:var(--link);text-decoration:none;} a:hover{text-decoration:underline;}
+  .pill{display:inline-block;padding:1px 8px;border-radius:999px;background:var(--grid);font-size:.78rem;color:var(--muted);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>The PHP2Shell patch race</h1>
+    <div class="sub">
+      How fast the internet is patching PHP against <b>PHP2Shell</b>
+      (CVE-2026-109618 / -109619, fixed 2026-10-21 in 8.2.35 / 8.3.36 / 8.4.27 / 8.5.12).<br>
+      Updated hourly · <span class="pill" id="updated">loading…</span>
+    </div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="card">
+    <h2>Patched over time <span class="cap">— % of <i>fixable</i> hosts (excludes EOL)</span></h2>
+    <div id="adoption" class="chart"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Exposure composition <span class="cap">— share of all PHP hosts</span></h2>
+      <div id="exposure" class="chart"></div>
+    </div>
+    <div class="card">
+      <h2>PHP branch share <span class="cap">— migration over time</span></h2>
+      <div id="branches" class="chart"></div>
+    </div>
+  </div>
+
+  <footer>
+    Aggregated public internet-scan data — anonymized counts only, no IP addresses.
+    “Patched” = running the fixed release or newer; “EOL” branches can never be fixed.
+    Detection-only. <a href="https://github.com/pagvac/php2shell-trends">Source &amp; methodology →</a>
+  </footer>
+</div>
+<script src="dashboard.js"></script>
+</body>
+</html>
