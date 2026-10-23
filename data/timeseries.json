@@ -1,11 +1,38 @@
 {
-  "generated_at": "2026-10-23T21:57:36+00:00",
+  "generated_at": "2026-10-23T22:17:20+00:00",
   "metric": "php2shell-exposure",
   "provenance": "aggregated public internet-scan data (anonymized counts, no IPs)",
   "synthetic": false,
   "points": [
     {
       "date": "2026-10-23T21:00Z",
+      "confirmed_php": 1911611,
+      "by_status": {
+        "ok": 65645,
+        "vulnerable": 621148,
+        "eol": 1224818,
+        "unknown": 0
+      },
+      "by_branch": {
+        "8.2": 288057,
+        "8.3": 239962,
+        "8.4": 90927,
+        "8.5": 67847,
+        "8.1": 118869,
+        "8.0": 91133,
+        "7.4": 104760,
+        "7.3": 112031,
+        "7.2": 216967,
+        "7.1": 26503,
+        "7.0": 39934,
+        "5.6": 237353,
+        "5.5": 19113,
+        "5.4": 149053,
+        "5.3": 109102
+      }
+    },
+    {
+      "date": "2026-10-23T22:00Z",
       "confirmed_php": 1911611,
       "by_status": {
         "ok": 65645,
