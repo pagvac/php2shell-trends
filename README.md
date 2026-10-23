@@ -28,8 +28,12 @@ of PHP version exposure over time — the share of internet-facing PHP hosts tha
   will *never* get a fix, so the "fixable" universe is only the supported-branch minority. The
   dashboard shows **% patched of the *fixable* population** next to the raw numbers, because
   that is the number that reflects whether the patch race is being won.
-- **Updated hourly.** `data/timeseries.json` holds the full hourly series (counts by status and
-  by PHP branch); the dashboard and charts are regenerated from it.
+- **Updated daily.** `data/timeseries.json` holds the full series (counts by status and by PHP
+  branch); the dashboard and charts are regenerated from it.
+- **Measurement lag.** Counts come from a rolling **~30-day** measurement window, so each point is
+  a trailing-30-day aggregate — trend changes lag real-world patching by up to ~30 days, and the
+  curve is smoothed rather than same-day. The underlying data refreshes on a day-to-week scale, so
+  daily is the finest cadence that carries real signal.
 - **Thresholds:** safe minimums 8.2.35 / 8.3.36 / 8.4.27 / 8.5.12; branches below 8.2 are EOL.
 
 ## Layout
