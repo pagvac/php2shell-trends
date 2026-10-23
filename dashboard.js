@@ -53,16 +53,16 @@
     }
     var d = Math.max(0, Math.floor((new Date(last.date) - FIX) / 864e5));
     var tiles = [
-      { k: "[fixable]", n: (fix ? (100 * (s.ok || 0) / fix).toFixed(1) : "0") + "%", c: STATUS.ok,
+      { n: (fix ? (100 * (s.ok || 0) / fix).toFixed(1) : "0") + "%", c: STATUS.ok,
         l: "patched", s: "of " + fmt(fix) + " fixable hosts" },
-      { k: "[all]", n: Math.round(100 * (s.vulnerable || 0) / tot) + "%", c: STATUS.vulnerable,
+      { n: Math.round(100 * (s.vulnerable || 0) / tot) + "%", c: STATUS.vulnerable,
         l: "still vulnerable", s: "of all PHP hosts" },
-      { k: "[eol]", n: Math.round(100 * (s.eol || 0) / tot) + "%", c: STATUS.eol,
+      { n: Math.round(100 * (s.eol || 0) / tot) + "%", c: STATUS.eol,
         l: "end-of-life", s: fmt(s.eol || 0) + " hosts · unfixable" },
-      { k: "[t]", n: d + "d", c: NEON, l: "since fix", s: "velocity " + vel }
+      { n: d + "d", c: NEON, l: "since fix", s: "velocity " + vel }
     ];
     document.getElementById("kpis").innerHTML = tiles.map(function (t) {
-      return '<div class="kpi" data-k="' + t.k + '">' +
+      return '<div class="kpi" style="--kc:' + t.c + '">' +
         '<div class="n" style="color:' + t.c + '">' + t.n + '</div>' +
         '<div class="l">' + t.l + '</div><div class="s">' + t.s + "</div></div>";
     }).join("");
@@ -155,7 +155,7 @@
       var points = ts.points || [];
       var u = document.getElementById("updated");
       if (!points.length) { u.textContent = "no data yet"; return; }
-      u.textContent = "data @ " + points[points.length - 1].date;
+      u.textContent = points[points.length - 1].date;
       kpis(points);
       adoption(mk("adoption"), points);
       exposure(mk("exposure"), points);
