@@ -40,7 +40,7 @@ of PHP version exposure over time — the share of internet-facing PHP hosts tha
 
 ```
 index.html · dashboard.js    the interactive dashboard (ECharts, served via GitHub Pages)
-data/timeseries.json         hourly anonymized aggregate series
+data/timeseries.json         daily anonymized aggregate series
 charts/*.svg                  static chart images embedded above
 ```
 
