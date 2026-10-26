@@ -155,7 +155,13 @@
       var points = ts.points || [];
       var u = document.getElementById("updated");
       if (!points.length) { u.textContent = "no data yet"; return; }
-      u.textContent = points[points.length - 1].date;
+      var iso = points[points.length - 1].date;
+      var dt = new Date(iso);
+      var local = isNaN(dt) ? "" : dt.toLocaleString([], {
+        year: "numeric", month: "short", day: "numeric",
+        hour: "2-digit", minute: "2-digit", timeZoneName: "short"
+      });
+      u.textContent = iso + (local ? " · " + local + " local" : "");
       kpis(points);
       adoption(mk("adoption"), points);
       exposure(mk("exposure"), points);
